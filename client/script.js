@@ -4,14 +4,19 @@ const messageInput = document.getElementById("message-input");
 
 function send(message) {
     const encodeMessage = encodeURI(message);
+    const formData = new FormData();
+    formData.append("message", encodeMessage);
 
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         let response = this.responseText;
         messagePool.innerHTML += "<div>" + response + "</div>";
     }
-    xhttp.open("GET", "http://localhost:8080/hello?name=" + encodeMessage);
-    xhttp.send();
+    xhttp.setRequestHeader = {
+
+    };
+    xhttp.open("POST", "http://localhost:8080/send");
+    xhttp.send(formData);
 }
 
 function clearMessageInput() {
